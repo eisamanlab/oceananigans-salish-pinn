@@ -1,4 +1,20 @@
 # oceananigans-salish-pinn
 Team SNL oceananigans hackathon project. 
 
-This is a test - LG
+## Setup SSH key
+This is only for the maintainers of this repository
+
+1.  Run the following command in your terminal to show your SSH public key
+
+```bash
+more ~/.ssh/id_rsa.pub
+```
+
+2. Copy The public key to your clipboard
+3. Open a web brwoser and log into your [GitHub](https://github.com) account
+4. Click on profile icon in the upper right and click on `Settings`
+5. On the left side slick on `SSH and GPC keys`
+6. click on the green `New SSH key` button
+7. Give the key a meaninful name that explains its purpose
+8. Paste the public SSH key from step 2  in the "key" field and click `add ssh key`
+9. Now you can clone and push to this repo effortlessly :)
