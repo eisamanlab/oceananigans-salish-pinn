@@ -1,0 +1,22 @@
+#!/bin/bash
+#PBS -A UCSG0002
+#PBS -N Clima_test
+#PBS -q casper
+#PBS -l walltime=01:00:00
+#PBS -l select=2:ncpus=4:mpiprocs=36:ngpus=1:mem=80GB:mps=1
+#PBS -l gpu_type=v100
+#PBS -j oe
+# Use scratch for temporary files to avoid space limits in /tmp
+export TMPDIR=${SCRATCH}/temp
+mkdir -p ${TMPDIR}
+
+# Load modules to match compile-time environment
+
+module purge
+module load ncarenv-basic/24.12 cuda/11.4 
+module load julia/1.11.2
+
+echo $(which julia)
+
+julia ./Clima_example.jl
+

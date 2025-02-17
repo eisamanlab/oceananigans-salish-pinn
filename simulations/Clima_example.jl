@@ -1,3 +1,6 @@
+using Pkg
+Pkg.activate("../oceananigans-env")
+
 using Oceananigans
 using Oceananigans.Units
 using Dates, CFTime
@@ -23,7 +26,7 @@ set!(ocean.model, T = ClimaOcean.ECCOMetadata(:temperature; dates),
 # Build and run an OceanSeaIceModel (with no sea ice component) forced by JRA55 reanalysis
 atmosphere = ClimaOcean.JRA55PrescribedAtmosphere(arch)
 coupled_model = ClimaOcean.OceanSeaIceModel(ocean; atmosphere)
-simulation = Simulation(coupled_model, Δt=5minutes, stop_time=3days)
+simulation = Simulation(coupled_model, Δt=5minutes, stop_time=2days)
 run!(simulation)
 
 

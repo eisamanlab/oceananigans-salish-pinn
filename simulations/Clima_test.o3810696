@@ -1,0 +1,28 @@
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) ncarenv/23.10
+
+Lmod is automatically replacing "ncarenv/23.10" with "ncarenv-basic/24.12".
+
+Lmod has detected the following error: The following module(s) are unknown:
+"cuda/11.4"
+
+Please check the spelling or version number. Also try "module spider ..."
+It is also possible your cache file is out-of-date; it may help to try:
+  $ module --ignore_cache load "cuda/11.4"
+
+Also make sure that all modulefiles written in TCL start with the string
+#%Module
+
+
+
+Lmod has detected the following error: These module(s) or extension(s) exist
+but cannot be loaded as requested: "julia/1.11.2"
+   Try: "module spider julia/1.11.2" to see how to load the module(s).
+
+
+
+which: no julia in (/glade/u/apps/casper/23.10/opt/wrappers/bin:/glade/u/apps/casper/23.10/opt/utils/bin:/glade/u/home/ntheunissen/.local/bin:/usr/lib/mit/bin:/opt/pbs/bin:/glade/u/apps/casper/23.10/opt/view/bin:/usr/local/bin:/usr/bin:/sbin:/bin)
+
+/var/spool/pbs/mom_priv/jobs/3810696.casper-pbs.SC: line 21: julia: command not found
