@@ -1,5 +1,4 @@
-# Oceananigans Salish Sea PINN
-hello hello 
+# Oceananigans Salish Sea PINN: 
 This repository contains all the code used in the NCAR hacakathon for Team SNL. The goal of the project is to run a regional tracer release simulation in the Salish Sea and emulate the output using a physics-informed neural network (PINN).
 
 ## Repository Structure
