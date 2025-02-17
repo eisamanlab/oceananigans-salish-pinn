@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -A UCSG0002
-#PBS -N Clima_test
+#PBS -N salish-test
 #PBS -q casper
 #PBS -l walltime=01:00:00
 #PBS -l select=2:ncpus=4:mpiprocs=36:ngpus=1:mem=80GB:mps=1
@@ -13,10 +13,12 @@ mkdir -p ${TMPDIR}
 # Load modules to match compile-time environment
 
 module purge
-module load ncarenv-basic/24.12 cuda/11.4 
+module load ncarenv-basic/24.12 
+module load cuda/12.3.2
 module load julia/1.11.2
 
-echo $(which julia)
+export ECCO_USERNAME=nicolastheunissen
+export ECCO_PASSWORD=dbwiT@d4KdjvkvsYhmu
 
-julia ./Clima_example.jl
+julia --project=/glade/u/home/ntheunissen/oceananigans-salish-pinn/oceananigans-env ./Salish.jl
 

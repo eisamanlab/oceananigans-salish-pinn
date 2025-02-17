@@ -1,5 +1,7 @@
 using Oceananigans
 
+arch = GPU()
+
 grid = RectilinearGrid(size=128, z=(-0.5, 0.5), topology=(Flat, Flat, Bounded))
 
 closure = ScalarDiffusivity(κ=1)

@@ -18,7 +18,7 @@ using Oceananigans.Units: minute, minutes, hour, hours, day, days, meter, meters
 # --------------------------------------------------
 # computing architecture
 # --------------------------------------------------
-architecture = CPU()
+architecture = GPU()
 
 # --------------------------------------------------
 # grid

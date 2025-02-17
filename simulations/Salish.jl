@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 using Pkg
-Pkg.activate("../oceananigans-env")
+# Pkg.activate("../oceananigans-env")
 
 using Oceananigans
 using Oceananigans.Units

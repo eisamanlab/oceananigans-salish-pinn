@@ -1,4 +1,5 @@
 [deps]
+CFTime = "179af706-886a-5703-950a-314cd64e0468"
 ClimaOcean = "0376089a-ecfe-4b0e-a64f-9c555d74d754"
 DataDeps = "124859b0-ceae-595e-8997-d05f6a7a8dfe"
 GeoMakie = "db073c08-6b98-4ee5-b6a4-5efafb3259c6"
