@@ -1,9 +1,9 @@
 #!/bin/bash
 #PBS -A UCSG0002
-#PBS -N salish-test
+#PBS -N med-example
 #PBS -q casper
-#PBS -l walltime=01:00:00
-#PBS -l select=2:ncpus=4:mpiprocs=36:ngpus=1:mem=80GB:mps=1
+#PBS -l walltime=0:10:00
+#PBS -l select=2:ncpus=1:mpiprocs=36:ngpus=1:mem=80GB:mps=1
 #PBS -l gpu_type=v100
 #PBS -j oe
 # Use scratch for temporary files to avoid space limits in /tmp
@@ -17,8 +17,10 @@ module load ncarenv-basic/24.12
 module load cuda/12.3.2
 module load julia/1.11.2
 
-export ECCO_USERNAME=nicolastheunissen
-export ECCO_PASSWORD=dbwiT@d4KdjvkvsYhmu
+export ECCO_USERNAME=YOURUSERNAME
+export ECCO_PASSWORD=YOURPASSWORD
 
-julia --project=/glade/u/home/ntheunissen/oceananigans-salish-pinn/oceananigans-env ./Salish.jl
+julia --project=/glade/u/home/ntheunissen/oceananigans-salish-pinn/oceananigans-env ./med-example.jl
 
+wait
+echo "Done"
