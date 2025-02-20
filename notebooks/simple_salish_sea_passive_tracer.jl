@@ -26,7 +26,7 @@ import ClimaOcean
 using Printf, Dates, CFTime, NCDatasets, CairoMakie, Interpolations
 
 using NCDatasets
-p = "u/home/sdalal/oceananigans-salish-pinn/notebooks/gebco_2024_n50.0_s47.0_w-127.0_e-120.0.nc" 
+p = "[filepath]" 
 
 #using the netcdf
 ds = NCDataset(p)
