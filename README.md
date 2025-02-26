@@ -1,4 +1,5 @@
 # Oceananigans Salish Sea PINN: 
+
 This repository contains all the code used in the NCAR hacakathon for Team SNL. The goal of the project is to run a regional tracer release simulation in the Salish Sea and emulate the output using a physics-informed neural network (PINN).
 
 ## Repository Structure
@@ -6,13 +7,19 @@ This repository contains all the code used in the NCAR hacakathon for Team SNL. 
 The tree below outlines the structure of this repo.
 
 ```
-├── LICENSE               <-- Repo license file
-├── README.md             <-- Top-level documentation
-├── notebooks/            <-- Jupyter notebooks
-├── oceananigans-env/     <-- julia environment files
-│   └── Project.toml
-├── simulation-output/    <-- NetCDF output from the simulations
-└── simulations/          <-- Oceananigans simulation code 
+.
+├── climaocean             <-- climaocean simulation stuff
+│   ├── notebooks          <-- jupyter notebooks
+│   ├── oceananigans-env   <-- julia/oceananigans env
+│   ├── output             <-- simulation output (not on GH)
+│   ├── simulations        <-- simulation code
+│   ├── submit-scripts     <-- HPC submit scripts
+│   └── videos             <-- tracer release animations
+├── LICENSE
+├── pinn                   <-- PINN stuff
+│   ├── notebooks          <-- jupyter notebooks
+│   └── output             <-- pinn output
+└── README.md
 ```
 
 ## Setup SSH key

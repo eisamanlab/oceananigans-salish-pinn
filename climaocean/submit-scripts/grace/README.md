@@ -1,8 +1,4 @@
-# Salish Sea Simulation on Grace
-
-This contains code, submit script, and environment files to run a simulation. 
-The simuation is based on example experiments provided by Clima. 
-This is mainly based on the one-degree global simulation. 
+# Submitting Slurm Script
 
 Use the following to submit a run to the cluser:
 
@@ -10,11 +6,6 @@ Use the following to submit a run to the cluser:
 sbatch submit.sbatch
 ```
 
-Note you will need to modify some paths in this script
-
-
-## Things to fix
-
-* Add a sponge layer at the open boundaries
-* Initialize the tracer after the spinup
-* Add simple ecosystem model, start with NPZD
+## Notes
+* YCRC documentation on using [Simple Linux Utility for Resource Management (SLURM)](https://docs.ycrc.yale.edu/clusters-at-yale/job-scheduling/)
+* You may need to modify some of the path in the slurm script
