@@ -1,30 +1,73 @@
 #!/bin/bash
 #SBATCH --job-name=clima
 #SBATCH --ntasks=1
-#SBATCH --time=1:00:00
+#SBATCH --time=3:00:00
 #SBATCH --account eisaman
 #SBATCH --nodes 1
 #SBATCH --mem 10G
-#SBATCH --partition gpu_devel
+#SBATCH --partition gpu
 #SBATCH --gpus=a100:1
 
 module purge
 module load miniconda/24.9.2 
 module load Julia/1.11.3-linux-x86_64
 
-# this is where all the forcing and environment files will be downloaded to
-export JULIA_DEPOT_PATH=/home/ljg48/project/oceananigans/scratch
+###---------------------------------------------------------
+### if true, this will instantiste the project
+### set to true only if the project is not instantiated yet
+### this will only need to be done once
+###---------------------------------------------------------
 
-# to setup an .env file so you don't accidently expose ECCO username and password
-# haven't setup or tested this yet
-#set -a  
-#source /home/ljg48/project/oceananigans/.env  
-#set +a 
+INSTANTIATE=true
 
-export ECCO_USERNAME=username
-export ECCO_PASSWORD=password
+###---------------------------------------------------------
+### path to simulation you want to run
+###---------------------------------------------------------
 
-# should only have to run this once
-#julia --project=/home/ljg48/project/oceananigans -e "using Pkg; Pkg.instantiate()"
+SIMULATION=/home/${USER}/palmer_scratch/climaocean/init-after-spinup.jl 
 
-julia --project=/home/ljg48/project/oceananigans ./salish-sea-tracer-release-coupled.jl
+###---------------------------------------------------------
+### this is path where where Project.toml is
+### note: do not put Project.toml at end of the path
+###---------------------------------------------------------
+
+PROJECT=/home/${USER}/palmer_scratch/climaocean
+
+###---------------------------------------------------------
+### this is where all downloaded file will live
+### will make scratch directory if does not already exist
+###---------------------------------------------------------
+
+DEPOT_PATH=/home/${USER}/palmer_scratch/climaocean/scratch
+mkdir -p ${DEPOT_PATH}
+
+export JULIA_DEPOT_PATH=${DEPOT_PATH}
+
+###-------------------------------------------
+### this contains ECCO credentials
+### your ~/.ecco-credentials 
+### should contain only these two lines:
+###
+### export ECCO_USERNAME=your-username
+### export ECCO_PASSWORD=your-password
+###-------------------------------------------
+
+source /home/${USER}/.ecco-drive  
+
+###-------------------------------------------
+### instantiates packages
+### should only have to run this once
+###-------------------------------------------
+
+if ${INSTANTIATE}; then
+    julia --project="${PROJECT}" -e "using Pkg; Pkg.instantiate()"
+fi
+
+wait
+
+###-------------------------------------------
+### runs the actual simulation
+###-------------------------------------------
+
+julia --project=${PROJECT} ${SIMULATION}
+
