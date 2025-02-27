@@ -122,24 +122,14 @@ ocean = ocean_simulation(grid;
 # initial conditions
 # ToDo!! set tracer concentration after spinup
 # --------------------------------------------------
-# index of tracer release
-lat_index = searchsortedfirst(grid.φᵃᶜᵃ, 48.22)
-lon_index = searchsortedfirst(grid.λᶜᵃᵃ, -123.40 + 360)
-surface_z_index = grid.Nz        
-
-# initialize tracer values to zero
-c_initial = ocean.model.tracers.c 
-
-# set initial concentration to 10 mol / m3 near Port Angelesl
-@allowscalar c_initial[lon_index, lat_index, surface_z_index] = 100
-
 #date = DateTimeProlepticGregorian(2000, 1, 1)
 #set!(ocean.model, T=ECCOMetadata(:temperature; dates=date),
 #                  S=ECCOMetadata(:salinity; dates=date))
 
 # sets temperature and salinity based on ECCO2 
 # don't reallly like this, like the commented out approach above
-set!(ocean.model, T = temperature[1], S = salinity[1], c = c_initial) 
+set!(ocean.model, T = temperature[1], S = salinity[1])
+
 
 # --------------------------------------------------
 # Prescribed atmosphere and radiation
@@ -237,10 +227,32 @@ ocean.output_writers[:surface_slice_writer] = NetCDFOutputWriter(
 run!(simulation)
 
 # --------------------------------------------------
+# initalize tracer after spinup
+# --------------------------------------------------
+# index of tracer release
+lat_index = searchsortedfirst(grid.φᵃᶜᵃ, 48.22)
+lon_index = searchsortedfirst(grid.λᶜᵃᵃ, -123.40 + 360)
+surface_z_index = grid.Nz        
+
+# initialize tracer values to zero
+c_initial = ocean.model.tracers.c 
+
+# set initial concentration to 100 mol / m3 near Port Angelesl
+# note we need to use allowscalar to mutate an index of array on a GPU
+@allowscalar c_initial[lon_index, lat_index, surface_z_index] = 100
+
+# set the initial tracer concentration 
+set!(ocean.model, c = c_initial)
+
+# --------------------------------------------------
 # Running the simulation for real
 # --------------------------------------------------
 # After the initial spin up of 10 days, we can increase the time-step and run for longer.
+#
+# |-------------|------------------------------------|
+# 10 day spinup |   real run for additional 50 days  |
 
-simulation.stop_time = 1095days
+simulation.stop_time = 60days
 simulation.Δt = 5minutes
 run!(simulation)
+
