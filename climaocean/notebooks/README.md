@@ -6,9 +6,6 @@ This directory contains all of our Jupyter notebooks. These are used for testing
 
 The following steps outline how to setup a Julia environment on Grace
 
-Can you try the following:
-# make a conda environment with jupyter/jupyterlab in it
-
 1. log into the devel partition
 
 ```sh
